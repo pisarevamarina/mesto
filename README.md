@@ -8,5 +8,5 @@
     При верстке проекта были использованы технологии flexbox, grid-layout, position absolute.
     Присутствует адаптивная верстка.
 
-     Ссылка на Github Pages: https://pisarevamarina.github.io/mesto/
+           Ссылка на Github Pages: https://pisarevamarina.github.io/mesto/
                             
