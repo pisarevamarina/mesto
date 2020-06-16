@@ -1,0 +1,28 @@
+@import url(./__form/popup__form.css);
+@import url(./__input/popup__input.css);
+@import url(./__save-button/popup__save-button.css);
+@import url(./__title/popup__title.css);
+@import url(./__input/_type/popup__input_type_info.css);
+@import url(./__input/_type/popup__input_type_name.css);
+@import url(./__exit-button/popup__exit-button.css);
+
+
+
+
+
+.popup{
+background-color: rgba(0, 0, 0, 0.5);
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 2;
+display: none;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+padding-left: 15px;
+padding-right: 15px;
+
+}
