@@ -10,14 +10,14 @@
     z-index: 10;
     left: 98%;
     bottom: 98%;
-    transition: transform 1.5s ease-out;
+    transition: opacity .5s ease-in;
 
 }
 
 .popup__exit-button:hover{
     opacity: .6;
     cursor: pointer;
-    transform: rotate(180deg);
+
 }
 
 @media screen and (max-width: 520px) {
