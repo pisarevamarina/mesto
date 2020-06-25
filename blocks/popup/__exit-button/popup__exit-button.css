@@ -1,3 +1,6 @@
+@import url(./_type/popup__exit-button_type_edit-profile.css/);
+@import url(./_type/popup__exit-button_type_new-card.css);
+
 .popup__exit-button{
    
     width: 46px;
