@@ -1,4 +1,4 @@
-.popup__save-button{
+.popup__submit-button{
     width: 100%;
     min-height: 50px;
     color: white;
@@ -12,7 +12,7 @@
     
 }
 
-.popup__save-button:hover{
+.popup__submit-button:hover{
     background-color: rgba(0, 0, 0, 0.8);
     cursor: pointer;
     

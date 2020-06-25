@@ -1,12 +1,12 @@
 let popup = document.querySelector('.popup');
 let editProfileButton = document.querySelector('.profile__edit-button');
 let closePopupButton = popup.querySelector('.popup__exit-button');
-let submitButton = popup.querySelector('.popup__save-button');
+let saveProfileButton = popup.querySelector('.popup__submit-button_type_save');
 let nameInput = document.querySelector('.popup__input_type_name')
 let jobInput = document.querySelector('.popup__input_type_info')
 let profileName = document.querySelector('.profile__title');
 let profileJob = document.querySelector('.profile__subtitle'); 
-let formElement = popup.querySelector('.popup__form')
+let formElement = popup.querySelector('.popup__form_type_edit-profile')
 
 function openPopup() {                           //добавляем класс, который открывает попап
     popup.classList.add('popup_opened');

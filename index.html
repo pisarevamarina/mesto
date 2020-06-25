@@ -72,15 +72,26 @@
                 <p class="footer__copyright">&COPY;2020 Mesto Russia</p>
             </footer>
         </main>
-        <section class="popup">
-            <form class="popup__form" name="edit-profile" method="GET" action="#">
+        <section class="popup popup_type_edit-profile">
+            <form class="popup__form popup__form_type_edit-profile" name="edit-profile" method="GET" action="#">
                 <button class="popup__exit-button" type="button"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <input type="text" class="popup__input popup__input_type_name" value="Жак-Ив Кусто"
                     placeholder=" Введите имя" name="name" required>
                 <input type="text" class="popup__input popup__input_type_info" value="Исследователь океана"
                     placeholder=" Чем вы занимаетесь?" name="job" required>
-                <button class="popup__save-button" type="submit">Сохранить</button>
+                <button class="popup__submit-button popup__submit-button_type_save" type="submit">Сохранить</button>
+            </form>
+        </section>
+        <section class="popup popup_type_new-card">
+            <form class="popup__form popup_form_type_new-card" name="add-new-cart" method="GET" action="#">
+                <button class="popup__exit-button" type="button"></button>
+                <h3 class="popup__title">Новое место</h3>
+                <input type="text" class="popup__input popup__input_type_title" value=""
+                    placeholder=" Название" name="title" required>
+                <input type="url" class="popup__input popup__input_type_image-link" value=" "
+                    placeholder=" Ссылка на картинку" name="image-link" required>
+                <button class="popup__submit-button popup__submit-button_type_create" type="submit">Создать</button>
             </form>
         </section>
     </div>

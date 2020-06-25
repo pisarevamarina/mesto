@@ -1,10 +1,15 @@
 @import url(./__form/popup__form.css);
 @import url(./__input/popup__input.css);
-@import url(./__save-button/popup__save-button.css);
 @import url(./__title/popup__title.css);
 @import url(./__input/_type/popup__input_type_info.css);
 @import url(./__input/_type/popup__input_type_name.css);
+@import url(./__input/_type/popup__input_type_image-link.css);
+@import url(./__input/_type/popup__input_type_title.css);
 @import url(./__exit-button/popup__exit-button.css);
+@import url(./__submit-button/popup__submit-button.css);
+@import url(./__submit-button/_type/popup__submit-button_type_create.css);
+@import url(./__submit-button/_type/popup__submit-button_type_save.css);
+@import url(./__create-card-button/popup__create-card-button.css);
 
 
 
