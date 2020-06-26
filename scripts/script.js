@@ -25,14 +25,6 @@ function formSubmitHandler (evt) {               // эта функция вст
     popupToggle(popupEditProfile);
 } 
 
-function overlayClick (event) {                   //эта функция закрывает попап при клике на пространство вокруг него
-    if (event.target == event.currentTarget) {
-        popupToggle ()
-    }
-
-}
-
-
 closePopupEditProfile.addEventListener('click', function (){        //обработчик на закрывающий попап крестик 
     popupToggle(popupEditProfile);
 });   
@@ -47,8 +39,6 @@ editProfileButton.addEventListener('click', function (){      // обработ�
 });  
 
 formElement.addEventListener('submit', formSubmitHandler);  // обработчик на саму форму
-
-//!!      popupEditProfile.addEventListener('click', overlayClick);   //ПОДУМАТЬ КАК РЕШИТЬ ВОПРОС обработчик для пространства вокруг попапа, закрывающий его при клике
 
 createNewCardButton.addEventListener('click', function() {
     popupToggle(popupNewCard);
@@ -76,14 +66,3 @@ closePopupNewCard.addEventListener('click', function() {
 
 
 
-/*function openPopup() {                           //добавляем класс, который открывает попап
-    popup.classList.add('popup_opened');
-
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-}
-
-function closePopup() {                          //снимаем класс с попапа, который его открывает
-    popup.classList.remove('popup_opened');
-}
-*/
