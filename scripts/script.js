@@ -10,6 +10,7 @@ let profileName = document.querySelector('.profile__title');
 let profileJob = document.querySelector('.profile__subtitle'); 
 let formElement = popupEditProfile.querySelector('.popup__form_type_edit-profile');
 let createNewCardButton = document.querySelector('.profile__add-button');
+let submitCardFormButton = popupNewCard.querySelector('.popup__submit-button_type_create')
 
 
 function popupToggle(popup) {
@@ -75,27 +76,35 @@ const initialCards = [
 ];
 
 const templateCards = document.querySelector('.template-cards');
-const cardsList = document.querySelector('.grid-elements')
+const cardsList = document.querySelector('.grid-elements');
+const cardForm = document.querySelector('.popup_form_type_new-card');
+const cardFormInputTitle = cardForm.querySelector('.popup__input_type_title');
+const cardFormInputImageLink = cardForm.querySelector('.popup__input_type_image-link');
+const cardFormSubmitBtn = cardForm.querySelector('.popup__submit-button_type_create');
 
-function addCards (item) {
+function addCards (name, link) {
     const card = templateCards.content.cloneNode(true);
-    card.querySelector('.grid-element__title').textContent = item.name;
-    card.querySelector('.grid-element__image').src = item.link;
+    card.querySelector('.grid-element__title').textContent = name;
+    card.querySelector('.grid-element__image').src = link;
 
     cardsList.prepend(card)
 } 
 
 initialCards.forEach(item => {
-   addCards(item);
+   addCards(item.name, item.link);
 });
 
 
+function cardFormSubmitHandler (event) {
+    event.preventDefault();      
+     let name = cardFormInputTitle.value;
+     let link = cardFormInputImageLink.value;
 
+    addCards(name, link);
+    popupToggle (popupNewCard);
+}
 
-
-
-
-
+cardForm.addEventListener('submit', cardFormSubmitHandler);
 
 
 
