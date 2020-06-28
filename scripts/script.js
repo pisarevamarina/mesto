@@ -84,11 +84,15 @@ const cardFormInputImageLink = cardForm.querySelector('.popup__input_type_image-
 const cardFormSubmitBtn = cardForm.querySelector('.popup__submit-button_type_create');
 
 
+
 function setLike (event){
    event.target.classList.toggle('grid-element__like-button_active');
 }
 
-
+function deleteCard (event) {
+    const card = event.target.closest('.grid-element')
+    card.remove();
+}
 
 
 function addCard(name, link) {
@@ -97,9 +101,12 @@ function addCard(name, link) {
     card.querySelector('.grid-element__image').src = link;
 
     card.querySelector('.grid-element__like-button').addEventListener('click', setLike);
+    card.querySelector('.grid-element__trash-button').addEventListener('click', deleteCard)
 
     cardsList.prepend(card)
 } 
+
+
 
 
 initialCards.forEach(item => {

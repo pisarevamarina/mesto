@@ -3,10 +3,12 @@
 @import url(../grid-element/__description/grid-element__description.css);
 @import url(../grid-element/__like-button/grid-element__like-button.css);
 @import url(../grid-element/__like-button/_active/grid-element__like-button_active.css);
+@import url(../grid-element/__trash-button/grid-element__trash-button.css);
 
 .grid-element{
     border-radius: 10px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative;
 }  
