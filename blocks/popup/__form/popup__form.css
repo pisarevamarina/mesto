@@ -14,3 +14,17 @@
     box-sizing: border-box;
 
 }
+
+@media screen and (max-width: 500px) {
+    .popup__form{
+
+}
+}
+
+@media screen and (max-width: 400px) {
+    .popup__form{
+    max-width: 240px;
+padding: 30px 20px;
+max-height: 258px;
+}
+}

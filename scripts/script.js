@@ -1,8 +1,9 @@
 let popupEditProfile = document.querySelector('.popup_type_edit-profile');
 let popupNewCard = document.querySelector('.popup_type_new-card');
+let popupImage = document.querySelector('.popup_type_image');
 let editProfileButton = document.querySelector('.profile__edit-button');
-let closePopupEditProfile = popupEditProfile.querySelector('.popup__exit-button_type_edit-profile');
-let closePopupNewCard = popupNewCard.querySelector('.popup__exit-button_type_new-card');
+let closePopupEditProfile = popupEditProfile.querySelector('.popup__exit-button');
+let closePopupNewCard = popupNewCard.querySelector('.popup__exit-button');
 let saveProfileButton = popupEditProfile.querySelector('.popup__submit-button_type_save');
 let nameInput = document.querySelector('.popup__input_type_name')
 let jobInput = document.querySelector('.popup__input_type_info')
@@ -11,6 +12,7 @@ let profileJob = document.querySelector('.profile__subtitle');
 let formElement = popupEditProfile.querySelector('.popup__form_type_edit-profile');
 let createNewCardButton = document.querySelector('.profile__add-button');
 let submitCardFormButton = popupNewCard.querySelector('.popup__submit-button_type_create');
+let closepopupImage = popupImage.querySelector('.popup__exit-button');
 
 
 
@@ -31,6 +33,7 @@ closePopupEditProfile.addEventListener('click', function (){        //обраб
     popupToggle(popupEditProfile);
 });   
 
+
 editProfileButton.addEventListener('click', function (){      // обработчик на кнопку редактирования профиля, которая открывает попап
     popupToggle(popupEditProfile);
     if (popupEditProfile.classList.contains('popup_opened')) {
@@ -45,9 +48,15 @@ formElement.addEventListener('submit', formSubmitHandler);  // обработч�
 createNewCardButton.addEventListener('click', function() {
     popupToggle(popupNewCard);
 })
+
 closePopupNewCard.addEventListener('click', function() {
     popupToggle(popupNewCard);
-});
+}); 
+
+closepopupImage.addEventListener('click', function (){
+    popupToggle(popupImage);
+})
+
 
 const initialCards = [
     {
@@ -85,46 +94,60 @@ const cardFormSubmitBtn = cardForm.querySelector('.popup__submit-button_type_cre
 
 
 
-function setLike (event){
+function setLike (event){            //функция для установки лайка
    event.target.classList.toggle('grid-element__like-button_active');
 }
 
-function deleteCard (event) {
+function deleteCard (event) {         //функция для удаления карточки
     const card = event.target.closest('.grid-element')
     card.remove();
 }
 
 
-function addCard(name, link) {
+function addCard(name, link) {              //функция добавления карточки на страницу
     const card = templateCards.content.cloneNode(true);
     card.querySelector('.grid-element__title').textContent = name;
     card.querySelector('.grid-element__image').src = link;
-
-    card.querySelector('.grid-element__like-button').addEventListener('click', setLike);
-    card.querySelector('.grid-element__trash-button').addEventListener('click', deleteCard)
-
+    card.querySelector('.grid-element__image').alt = name;
+    addCardListeners(card)
     cardsList.prepend(card)
+
+
 } 
 
 
+function addCardListeners(card){             //функия с обработчиками событий для карточки
+    card.querySelector('.grid-element__like-button').addEventListener('click', setLike);
+    card.querySelector('.grid-element__trash-button').addEventListener('click', deleteCard);
+    card.querySelector('.grid-element__image').addEventListener('click', openPopupImage)
+}
+
+function openPopupImage (event) {       //функция открывающая попап с картинкой
+    const imageElement =  event.target.closest('.grid-element__image');
+    document.querySelector('.popup__image').src = imageElement.src;
+    document.querySelector('.popup__bottom-title').textContent = imageElement.alt;
+   popupToggle(popupImage);
+
+  
+}
 
 
-initialCards.forEach(item => {
+initialCards.forEach(item => {        
    addCard(item.name, item.link);
 });
 
-function cardFormSubmitHandler (event) {
-    event.preventDefault();      
+function cardFormSubmitHandler (event) {    //функция для формы добавления карточек, которая принимает
+    event.preventDefault();                 //из ипутов пользовательский текст и ссылку и вставляет в карточку
      let name = cardFormInputTitle.value;
      let link = cardFormInputImageLink.value;
 
-     cardFormInputImageLink.value = "";
+     cardFormInputImageLink.value = "";   //эти строчки обнуляют формы после введения данных 
      cardFormInputTitle.value = "";
 
-    addCard(name, link);
-    popupToggle (popupNewCard);
+    addCard(name, link);                  //передаем  пользовательские данные в фунцию создания карточки
+    popupToggle (popupNewCard);            //закрываем попап
 }
 
-cardForm.addEventListener('submit', cardFormSubmitHandler);
+cardForm.addEventListener('submit', cardFormSubmitHandler);  //обработчик для формы создания карточки
 
 

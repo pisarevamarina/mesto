@@ -10,9 +10,11 @@
 @import url(./__submit-button/_type/popup__submit-button_type_create.css);
 @import url(./__submit-button/_type/popup__submit-button_type_save.css);
 @import url(./__create-card-button/popup__create-card-button.css);
-
-
-
+@import url(./__image/popup__image.css);
+@import url(./_type/popup_type_image.css);
+@import url(./__bottom-title/popup__bottom-title.css);
+@import url(./__container/popup__container.css);
+@import url(./__exit-button/_type/popup__exit-button_type_image-popup.css);
 
 
 .popup{
@@ -22,12 +24,20 @@ top: 0;
 right: 0;
 bottom: 0;
 left: 0;
-z-index: 2;
-display: none;
+display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
 padding-left: 15px;
 padding-right: 15px;
+visibility: hidden;
+opacity: 0;
+transition: visibility 0s, opacity 0.5s linear;
+}
 
+
+@media screen and (max-width: 500px) {
+    .popup{
+padding: 0 40px;
+}
 }

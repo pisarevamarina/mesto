@@ -41,7 +41,7 @@
         </main>
         <section class="popup popup_type_edit-profile">
             <form class="popup__form popup__form_type_edit-profile" name="edit-profile" method="GET" action="#">
-                <button class="popup__exit-button popup__exit-button_type_edit-profile" type="button"></button>
+                <button class="popup__exit-button" type="button"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <input type="text" class="popup__input popup__input_type_name" value="Жак-Ив Кусто"
                     placeholder=" Введите имя" name="name" required>
@@ -52,7 +52,7 @@
         </section>
         <section class="popup popup_type_new-card">
             <form class="popup__form popup_form_type_new-card" name="add-new-cart" method="GET" action="#">
-                <button class="popup__exit-button popup__exit-button_type_new-card" type="button"></button>
+                <button class="popup__exit-button" type="button"></button>
                 <h3 class="popup__title">Новое место</h3>
                 <input type="text" class="popup__input popup__input_type_title" value=""
                     placeholder=" Название" name="title" >
@@ -61,6 +61,14 @@
                 <button class="popup__submit-button popup__submit-button_type_create" type="submit">Создать</button>
             </form>
         </section>
+        <section class="popup popup_type_image">
+            <div class="popup__container">
+                <button class="popup__exit-button popup__exit-button_type_image-popup" type="button"></button>
+                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="" class="popup__image">
+                <h3 class="popup__bottom-title">Крым</h3>
+            </div>
+        </section>
+
     </div>
     <script src="scripts/script.js"></script>
 </body>
