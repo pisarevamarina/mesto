@@ -25,15 +25,15 @@
             </section>
             <section class="grid-elements">
                 <template class="template-cards">
-                <div class="grid-element">
-                    <img src="images/baikal.jpg" alt="Скалы и чайки на озере Байкал" class="grid-element__image">
-                    <button class="grid-element__trash-button" type="button"></button>
-                    <div class="grid-element__description">
-                        <h3 class="grid-element__title"></h3>
-                        <button class="grid-element__like-button" type="button"></button>
+                    <div class="grid-element">
+                        <img src="images/baikal.jpg" alt="Скалы и чайки на озере Байкал" class="grid-element__image">
+                        <button class="grid-element__trash-button" type="button"></button>
+                        <div class="grid-element__description">
+                            <h3 class="grid-element__title"></h3>
+                            <button class="grid-element__like-button" type="button"></button>
+                        </div>
                     </div>
-                </div>
-            </template>
+                </template>
             </section>
             <footer class="footer">
                 <p class="footer__copyright">&COPY;2020 Mesto Russia</p>
@@ -54,17 +54,18 @@
             <form class="popup__form popup_form_type_new-card" name="add-new-cart" method="GET" action="#">
                 <button class="popup__exit-button" type="button"></button>
                 <h3 class="popup__title">Новое место</h3>
-                <input type="text" class="popup__input popup__input_type_title" value=""
-                    placeholder=" Название" name="title" >
-                <input type="url" class="popup__input popup__input_type_image-link" value=" "
-                    placeholder=" Ссылка на картинку" name="image-link" >
+                <input type="text" class="popup__input popup__input_type_title" value="" placeholder=" Название"
+                    name="title">
+                <input type="url" class="popup__input popup__input_type_image-link" value=""
+                    placeholder=" Ссылка на картинку" name="image-link">
                 <button class="popup__submit-button popup__submit-button_type_create" type="submit">Создать</button>
             </form>
         </section>
         <section class="popup popup_type_image">
             <div class="popup__container">
                 <button class="popup__exit-button popup__exit-button_type_image-popup" type="button"></button>
-                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="" class="popup__image">
+                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
+                    alt="" class="popup__image">
                 <h3 class="popup__bottom-title">Крым</h3>
             </div>
         </section>

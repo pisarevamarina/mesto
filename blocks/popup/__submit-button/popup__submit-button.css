@@ -18,3 +18,11 @@
     cursor: pointer;
     
 }
+
+@media screen and (max-width: 400px){
+    .popup__submit-button{
+        min-height: 40px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
