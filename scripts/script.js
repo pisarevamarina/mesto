@@ -1,24 +1,23 @@
-const popupEditProfile = document.querySelector('.popup_type_edit-profile');  //попап редактирования профиля
-const popupNewCard = document.querySelector('.popup_type_new-card');          // попап добавления новой карточки
-const popupImage = document.querySelector('.popup_type_image');               // попап со всплывающей картинкой
-const editProfileButton = document.querySelector('.profile__edit-button');    // кнопка редактирования профиля
-const closePopupEditProfile = popupEditProfile.querySelector('.popup__exit-button');  // кнопка закрытия попапа редактирования профиля
-const closePopupNewCard = popupNewCard.querySelector('.popup__exit-button');       // кнопка закрытия попапа добавления карточки
-const saveProfileButton = popupEditProfile.querySelector('.popup__submit-button_type_save');  //кнопка сохранения новых данный профиля
-const nameInput = document.querySelector('.popup__input_type_name')               // инпут ввода имени
-const jobInput = document.querySelector('.popup__input_type_info')                // инпут ввода деятельности
-const profileName = document.querySelector('.profile__title');                  // имя профия
-const profileJob = document.querySelector('.profile__subtitle');                 // название деятельности
-const formElement = popupEditProfile.querySelector('.popup__form_type_edit-profile');     // форма попапа редактирования профия
-const createNewCardButton = document.querySelector('.profile__add-button');             // кнопка создания новой карточки
-const submitCardFormButton = popupNewCard.querySelector('.popup__submit-button_type_create');         // кнопка подтверждения создания новой карточки
-const closepopupImage = popupImage.querySelector('.popup__exit-button');      //кнопка закрытия попапа с картинкой
-const templateCards = document.querySelector('.template-cards');  // template элемент
-const cardsList = document.querySelector('.grid-elements');     // контейнер, содержайщий все карточки на странице
-const cardForm = document.querySelector('.popup_form_type_new-card');       // форма создания новой карточки
-const cardFormInputTitle = cardForm.querySelector('.popup__input_type_title');  // // инпут для ввода названия новой карточки
-const cardFormInputImageLink = cardForm.querySelector('.popup__input_type_image-link');  // инпут для ввода ссылки на карточку
-const cardFormSubmitBtn = cardForm.querySelector('.popup__submit-button_type_create');  // кнопка подтверждения создания новой карточки
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');  
+const popupNewCard = document.querySelector('.popup_type_new-card');          
+const popupImage = document.querySelector('.popup_type_image');               
+const editProfileButton = document.querySelector('.profile__edit-button');    
+const closePopupEditProfile = popupEditProfile.querySelector('.popup__exit-button');  
+const closePopupNewCard = popupNewCard.querySelector('.popup__exit-button');       
+const saveProfileButton = popupEditProfile.querySelector('.popup__submit-button_type_save');  
+const nameInput = document.querySelector('.popup__input_type_name')               
+const jobInput = document.querySelector('.popup__input_type_info')                
+const profileName = document.querySelector('.profile__title');                
+const profileJob = document.querySelector('.profile__subtitle');                
+const formElement = popupEditProfile.querySelector('.popup__form_type_edit-profile');     
+const createNewCardButton = document.querySelector('.profile__add-button');                 
+const closepopupImage = popupImage.querySelector('.popup__exit-button'); 
+const templateCards = document.querySelector('.template-cards'); 
+const cardsList = document.querySelector('.grid-elements');     
+const cardForm = document.querySelector('.popup_form_type_new-card');       
+const cardFormInputTitle = cardForm.querySelector('.popup__input_type_title');  
+const cardFormInputImageLink = cardForm.querySelector('.popup__input_type_image-link');  
+const cardFormSubmitBtn = cardForm.querySelector('.popup__submit-button_type_create');  
 
 
 function popupToggle(popup) {                   //функция тогла попапа
@@ -61,32 +60,7 @@ editProfileButton.addEventListener('click', function () {          // обраб
 });
 
 
-const initialCards = [                // массив с карточками "из коробки"
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+
 
 
 createNewCardButton.addEventListener('click', function () {       // обработчик на кнопку открытия попапа создания новой карточки
