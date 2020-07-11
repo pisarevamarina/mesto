@@ -19,7 +19,6 @@ const cardFormInputTitle = cardForm.querySelector('.popup__input_type_title');
 const cardFormInputImageLink = cardForm.querySelector('.popup__input_type_image-link');
 const cardFormSubmitBtn = cardForm.querySelector('.popup__submit-button_type_create');
 
-
 function popupToggle(popup) {                   //функция тогла попапа
     popup.classList.toggle('popup_opened');
 }
@@ -64,6 +63,7 @@ createNewCardButton.addEventListener('click', function () {       // обраб�
     if (popupNewCard.classList.contains('popup_opened')) {
         cardFormInputImageLink.value = "";
         cardFormInputTitle.value = "";
+
     }
 })
 
@@ -146,9 +146,12 @@ const checkInputValidity = (popupForm, inputElement) => {
 
 function setEventListeners(popupForm) {
     const inputList = Array.from(popupForm.querySelectorAll('.popup__input'));
+    const buttonElement = popupForm.querySelector('.popup__submit-button');
+    toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
-            checkInputValidity(popupForm, inputElement)
+            checkInputValidity(popupForm, inputElement);
+            toggleButtonState(inputList, buttonElement);
         })
 
     })
@@ -166,3 +169,20 @@ function enableValidation() {
 }
 
 enableValidation()
+
+function hasInvalidInput (inputList) {
+   return inputList.some((inputElement) => {
+   return !inputElement.validity.valid;
+   })
+}
+
+function toggleButtonState (inputList, buttonElement) {
+    if (hasInvalidInput(inputList)) {
+       buttonElement.classList.add('popup__submit-button_type_disabled');
+       buttonElement.setAttribute('disabled', 'disabled')
+    }
+    else {
+        buttonElement.classList.remove('popup__submit-button_type_disabled');
+        buttonElement.removeAttribute('disabled', 'disabled')   
+    }
+}
