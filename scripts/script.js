@@ -18,11 +18,44 @@ const cardForm = document.querySelector('.popup_form_type_new-card');
 const cardFormInputTitle = cardForm.querySelector('.popup__input_type_title');
 const cardFormInputImageLink = cardForm.querySelector('.popup__input_type_image-link');
 const cardFormSubmitBtn = cardForm.querySelector('.popup__submit-button_type_create');
+const popups = document.querySelectorAll('.popup')
 
 function popupToggle(popup) {                   //функция тогла попапа
     popup.classList.toggle('popup_opened');
 }
 
+
+function overlayPforilePopap (evt) {         //закрытие попапов по оверлкю
+    if (evt.target === evt.currentTarget) {
+        popupEditProfile.classList.remove('popup_opened')
+    }
+
+}
+function overlayImagePopap (evt) {
+    if (evt.target === evt.currentTarget) {
+        popupImage.classList.remove('popup_opened')
+    }
+
+}
+
+function overlayNewCardPopup (evt) {
+    if (evt.target === evt.currentTarget) {
+        popupNewCard.classList.remove('popup_opened')
+    }
+
+}
+
+popupNewCard.addEventListener('click', overlayNewCardPopup)
+popupImage.addEventListener('click', overlayImagePopap)
+popupEditProfile.addEventListener('click', overlayPforilePopap)
+
+
+document.addEventListener('keydown', (evt) => {         // закрытие попапа по ESC
+    const currentPopup = document.querySelector('.popup_opened');
+      if (currentPopup && evt.key === 'Escape') {
+        popupToggle(currentPopup);
+    }
+  }); 
 
 
 function formSubmitHandler(evt) {               // эта функция вставляет в поля на странице данные из формы, которые ввел
@@ -141,7 +174,7 @@ const checkInputValidity = (popupForm, inputElement) => {
     }
     else {
         hideInputError(popupForm, inputElement)
-};
+    };
 }
 
 function setEventListeners(popupForm) {
@@ -170,19 +203,20 @@ function enableValidation() {
 
 enableValidation()
 
-function hasInvalidInput (inputList) {
-   return inputList.some((inputElement) => {
-   return !inputElement.validity.valid;
-   })
+function hasInvalidInput(inputList) {
+    return inputList.some((inputElement) => {
+        return !inputElement.validity.valid;
+    })
 }
 
-function toggleButtonState (inputList, buttonElement) {
+function toggleButtonState(inputList, buttonElement) {
     if (hasInvalidInput(inputList)) {
-       buttonElement.classList.add('popup__submit-button_type_disabled');
-       buttonElement.setAttribute('disabled', 'disabled')
+        buttonElement.classList.add('popup__submit-button_type_disabled');
+        buttonElement.setAttribute('disabled', 'disabled')
     }
     else {
         buttonElement.classList.remove('popup__submit-button_type_disabled');
-        buttonElement.removeAttribute('disabled', 'disabled')   
+        buttonElement.removeAttribute('disabled', 'disabled')
     }
 }
+
