@@ -68,13 +68,22 @@ function overlayNewCardPopup(evt) {
 
 }
 
-closePopupEditProfile.addEventListener('click', function () {   //обработчики на закрывающий попап крестик
+function changeButtonState(popup) {
+    const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
+    const buttonElement = popup.querySelector(config.submitButtonSelector);
+
+    toggleButtonState(inputList, buttonElement, config)
+
+};
+
+closePopupEditProfile.addEventListener('click', function () { 
+    changeButtonState(popupEditProfile) //обработчики на закрывающий попап крестик
     popupToggle(popupEditProfile)
 });
-closePopupNewCard.addEventListener('click', function () {  
+closePopupNewCard.addEventListener('click', function () {
     popupToggle(popupNewCard);
 });
-closepopupImage.addEventListener('click', function () { 
+closepopupImage.addEventListener('click', function () {
     popupToggle(popupImage);
 })
 
@@ -83,11 +92,12 @@ popupImage.addEventListener('click', overlayImagePopap)
 popupEditProfile.addEventListener('click', overlayPforilePopap)
 
 
-function validateErrorRemoving(popupForm) {       //функция удаления ошибок при открытии попапа
+function validateErrorRemoving(popupForm) {       //функция удаления ошибок при открытии попапа 
     const inputList = Array.from(popupForm.querySelectorAll('.popup__input'));
     inputList.forEach((inputElement) => {
         hideInputError(popupForm, inputElement, config);
     })
+
 }
 
 function formSubmitHandler(evt) {               // эта функция вставляет в поля на странице данные из формы, которые ввел
@@ -102,9 +112,10 @@ function formSubmitHandler(evt) {               // эта функция вст�
 formEditProfile.addEventListener('submit', formSubmitHandler);  // обработчик на  форму открытия попапа редактирования профиля
 
 editProfileButton.addEventListener('click', function () {          // обработчик на кнопку редактирования профиля, которая открывает попап
-    validateErrorRemoving(editForm);                               // обнуление ошибок при открытии
+    validateErrorRemoving(editForm);
+    changeButtonState(popupEditProfile);                               // обнуление ошибок при открытии
     popupToggle(popupEditProfile);                                //с функцией, которая присваивает инпутам текущие значения на странице
-    if (popupEditProfile.classList.contains('popup_opened')) {
+   if (popupEditProfile.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
 
@@ -114,6 +125,7 @@ editProfileButton.addEventListener('click', function () {          // обраб
 createNewCardButton.addEventListener('click', function () {       // обработчик на кнопку открытия попапа создания новой карточки
     popupToggle(popupNewCard);
     validateErrorRemoving(newCardForm);
+    changeButtonState(popupNewCard); 
     if (popupNewCard.classList.contains('popup_opened')) {
         cardFormInputImageLink.value = "";
         cardFormInputTitle.value = "";
