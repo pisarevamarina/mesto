@@ -118,7 +118,7 @@ editProfileButton.addEventListener('click', function () {          // обраб
    if (popupEditProfile.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
-
+        changeButtonState(popupEditProfile);  
     }
 });
 
