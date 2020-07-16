@@ -6,7 +6,6 @@ const popupImage = document.querySelector('.popup_type_image');
 const editProfileButton = document.querySelector('.profile__edit-button');
 const closePopupEditProfile = popupEditProfile.querySelector('.popup__exit-button');
 const closePopupNewCard = popupNewCard.querySelector('.popup__exit-button');
-const saveProfileButton = popupEditProfile.querySelector('.popup__submit-button_type_save');
 const nameInput = document.querySelector('.popup__input_type_name')
 const jobInput = document.querySelector('.popup__input_type_info')
 const profileName = document.querySelector('.profile__title');
@@ -19,7 +18,6 @@ const cardsList = document.querySelector('.grid-elements');
 const cardForm = document.querySelector('.popup_form_type_new-card');
 const cardFormInputTitle = cardForm.querySelector('.popup__input_type_title');
 const cardFormInputImageLink = cardForm.querySelector('.popup__input_type_image-link');
-const cardFormSubmitBtn = cardForm.querySelector('.popup__submit-button_type_create');
 const config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -48,24 +46,11 @@ function closePopupOnEsc(evt) {        // закрытие попапа по ESC
 
 }
 
-function overlayPforilePopap(evt) {         //закрытие попапов по оверлкю
-    if (evt.target === evt.currentTarget) {
-        popupEditProfile.classList.remove('popup_opened')
+function closePopupOnOverlay (evt) {
+    const currentPopup = document.querySelector('.popup_opened');
+    if (currentPopup && evt.target === evt.currentTarget) {
+        currentPopup.classList.remove('popup_opened')
     }
-
-}
-function overlayImagePopap(evt) {
-    if (evt.target === evt.currentTarget) {
-        popupImage.classList.remove('popup_opened')
-    }
-
-}
-
-function overlayNewCardPopup(evt) {
-    if (evt.target === evt.currentTarget) {
-        popupNewCard.classList.remove('popup_opened')
-    }
-
 }
 
 function changeButtonState(popup) {
@@ -87,9 +72,9 @@ closepopupImage.addEventListener('click', function () {
     popupToggle(popupImage);
 })
 
-popupNewCard.addEventListener('click', overlayNewCardPopup)
-popupImage.addEventListener('click', overlayImagePopap)
-popupEditProfile.addEventListener('click', overlayPforilePopap)
+popupNewCard.addEventListener('click', closePopupOnOverlay)
+popupImage.addEventListener('click', closePopupOnOverlay)
+popupEditProfile.addEventListener('click', closePopupOnOverlay)
 
 
 function validateErrorRemoving(popupForm) {       //функция удаления ошибок при открытии попапа 
@@ -118,7 +103,7 @@ editProfileButton.addEventListener('click', function () {          // обраб
    if (popupEditProfile.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
-        changeButtonState(popupEditProfile);  
+        changeButtonState(popupEditProfile);
     }
 });
 
@@ -133,30 +118,35 @@ createNewCardButton.addEventListener('click', function () {       // обраб�
     }
 })
 
-
-function addCard(name, link) {                                     //функция добавления карточки на страницу
-    const card = templateCards.content.cloneNode(true);
-    card.querySelector('.grid-element__title').textContent = name;
-    card.querySelector('.grid-element__image').src = link;
-    card.querySelector('.grid-element__image').alt = name;
-    addCardListeners(card);
+function renderCard(name, link) {
+    const card = addCard(name, link)
     cardsList.prepend(card);
 }
 
+function addCard(name, link) {                                     //функция добавления карточки на страницу
+    const card = templateCards.content.cloneNode(true);
+    const cardImage = card.querySelector('.grid-element__image');
+    card.querySelector('.grid-element__title').textContent = name;
+    cardImage.src = link;
+    cardImage.alt = name;
+    addCardListeners(card);
+    return card
+}
+
 initialCards.forEach(item => {
-    addCard(item.name, item.link);
+    renderCard(item.name, item.link);
 });
 
 
 function cardFormSubmitHandler(evt) {    //функция для формы добавления карточек, которая принимает
     evt.preventDefault();                 //из ипутов пользовательский текст и ссылку и вставляет в карточку
-    let name = cardFormInputTitle.value;
-    let link = cardFormInputImageLink.value;
+    const name = cardFormInputTitle.value;
+    const link = cardFormInputImageLink.value;
 
     cardFormInputImageLink.value = "";
     cardFormInputTitle.value = "";
 
-    addCard(name, link);                  //передаем  пользовательские данные в фунцию создания карточки
+    renderCard(name, link);                  //передаем  пользовательские данные в фунцию создания карточки
     popupToggle(popupNewCard);            //закрываем попап
 }
 
