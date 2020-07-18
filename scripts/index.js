@@ -28,20 +28,21 @@ const config = {
     errorActiveClass: 'popup__input-error_active'
 };
 
-function popupToggle(popup) {                   //функция тогла попапа 
-    popup.classList.toggle('popup_opened');
-    if (popup.classList.contains('popup_opened')) {
-        document.addEventListener('keydown', closePopupOnEsc)
-    }
-    else {
-        document.removeEventListener('keydown', closePopupOnEsc)
-    }
+
+function openPopup (popup) {
+    popup.classList.add('popup_opened')
+    document.addEventListener('keydown', closePopupOnEsc)
 }
 
-function closePopupOnEsc(evt) {        // закрытие попапа по ESC
+function closePopup (popup) {
+    popup.classList.remove('popup_opened')
+    document.removeEventListener('keydown', closePopupOnEsc)
+}
+
+function closePopupOnEsc(evt) {                                // закрытие попапа по ESC
     const currentPopup = document.querySelector('.popup_opened');
     if (currentPopup && evt.key === 'Escape') {
-        popupToggle(currentPopup);
+        closePopup(currentPopup);
     }
 
 }
@@ -49,7 +50,7 @@ function closePopupOnEsc(evt) {        // закрытие попапа по ESC
 function closePopupOnOverlay (evt) {
     const currentPopup = document.querySelector('.popup_opened');
     if (currentPopup && evt.target === evt.currentTarget) {
-        currentPopup.classList.remove('popup_opened')
+        closePopup(currentPopup)
     }
 }
 
@@ -63,18 +64,18 @@ function changeButtonState(popup) {
 
 closePopupEditProfile.addEventListener('click', function () { 
     changeButtonState(popupEditProfile) //обработчики на закрывающий попап крестик
-    popupToggle(popupEditProfile)
+    closePopup(popupEditProfile)
 });
 closePopupNewCard.addEventListener('click', function () {
-    popupToggle(popupNewCard);
+    closePopup(popupNewCard);
 });
 closepopupImage.addEventListener('click', function () {
-    popupToggle(popupImage);
+    closePopup(popupImage);
 })
 
-popupNewCard.addEventListener('click', closePopupOnOverlay)
-popupImage.addEventListener('click', closePopupOnOverlay)
-popupEditProfile.addEventListener('click', closePopupOnOverlay)
+popupNewCard.addEventListener('mousedown', closePopupOnOverlay)
+popupImage.addEventListener('mousedown', closePopupOnOverlay)
+popupEditProfile.addEventListener('mousedown', closePopupOnOverlay)
 
 
 function validateErrorRemoving(popupForm) {       //функция удаления ошибок при открытии попапа 
@@ -91,7 +92,7 @@ function formSubmitHandler(evt) {               // эта функция вст�
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    popupToggle(popupEditProfile);
+    closePopup(popupEditProfile);
 }
 
 formEditProfile.addEventListener('submit', formSubmitHandler);  // обработчик на  форму открытия попапа редактирования профиля
@@ -99,7 +100,7 @@ formEditProfile.addEventListener('submit', formSubmitHandler);  // обрабо�
 editProfileButton.addEventListener('click', function () {          // обработчик на кнопку редактирования профиля, которая открывает попап
     validateErrorRemoving(editForm);
     changeButtonState(popupEditProfile);                               // обнуление ошибок при открытии
-    popupToggle(popupEditProfile);                                //с функцией, которая присваивает инпутам текущие значения на странице
+    openPopup(popupEditProfile);                                //с функцией, которая присваивает инпутам текущие значения на странице
    if (popupEditProfile.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
@@ -108,13 +109,12 @@ editProfileButton.addEventListener('click', function () {          // обраб
 });
 
 createNewCardButton.addEventListener('click', function () {       // обработчик на кнопку открытия попапа создания новой карточки
-    popupToggle(popupNewCard);
+    openPopup(popupNewCard);
     validateErrorRemoving(newCardForm);
     changeButtonState(popupNewCard); 
     if (popupNewCard.classList.contains('popup_opened')) {
         cardFormInputImageLink.value = "";
         cardFormInputTitle.value = "";
-
     }
 })
 
@@ -147,7 +147,7 @@ function cardFormSubmitHandler(evt) {    //функция для формы до
     cardFormInputTitle.value = "";
 
     renderCard(name, link);                  //передаем  пользовательские данные в фунцию создания карточки
-    popupToggle(popupNewCard);            //закрываем попап
+    closePopup(popupNewCard);            //закрываем попап
 }
 
 cardForm.addEventListener('submit', cardFormSubmitHandler);  //обработчик для формы создания карточки
@@ -165,7 +165,7 @@ function openPopupImage(evt) {       //функция открывающая п�
     const imageElement = evt.target.closest('.grid-element__image');
     document.querySelector('.popup__image').src = imageElement.src;
     document.querySelector('.popup__bottom-title').textContent = imageElement.alt;
-    popupToggle(popupImage);
+    openPopup(popupImage);
 }
 
 function addCardListeners(card) {             //функия с обработчиками событий для карточки
