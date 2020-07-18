@@ -28,38 +28,28 @@ const config = {
     errorActiveClass: 'popup__input-error_active'
 };
 
-function setEventListeners(popup) {
-    popup.addEventListener('mousedown', closePopupOnOverlay)
-    document.addEventListener('keydown', closePopupOnEsc)
-}
-
-function removeEventListeners(popup) {
-    popup.removeEventListener('mousedown', closePopupOnOverlay)
-    document.removeEventListener('keydown', closePopupOnEsc)
-}
-
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
-
-    setEventListeners(popup);
-}
-
-function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-    removeEventListeners(popup);
+function popupToggle(popup) {                   //функция тогла попапа 
+    popup.classList.toggle('popup_opened');
+    if (popup.classList.contains('popup_opened')) {
+        document.addEventListener('keydown', closePopupOnEsc)
+    }
+    else {
+        document.removeEventListener('keydown', closePopupOnEsc)
+    }
 }
 
 function closePopupOnEsc(evt) {        // закрытие попапа по ESC
     const currentPopup = document.querySelector('.popup_opened');
     if (currentPopup && evt.key === 'Escape') {
-        closePopup(currentPopup)
+        popupToggle(currentPopup);
     }
+
 }
 
-function closePopupOnOverlay(evt) {
+function closePopupOnOverlay (evt) {
     const currentPopup = document.querySelector('.popup_opened');
     if (currentPopup && evt.target === evt.currentTarget) {
-        closePopup(currentPopup)
+        currentPopup.classList.remove('popup_opened')
     }
 }
 
@@ -71,20 +61,23 @@ function changeButtonState(popup) {
 
 };
 
-
-closePopupEditProfile.addEventListener('click', function () {    //обработчики на закрывающий попап крестик
-    changeButtonState(popupEditProfile)                           
-    closePopup(popupEditProfile)
+closePopupEditProfile.addEventListener('click', function () { 
+    changeButtonState(popupEditProfile) //обработчики на закрывающий попап крестик
+    popupToggle(popupEditProfile)
 });
 closePopupNewCard.addEventListener('click', function () {
-    closePopup(popupNewCard); 
+    popupToggle(popupNewCard);
 });
 closepopupImage.addEventListener('click', function () {
-    closePopup(popupImage); 
+    popupToggle(popupImage);
 })
 
+popupNewCard.addEventListener('click', closePopupOnOverlay)
+popupImage.addEventListener('click', closePopupOnOverlay)
+popupEditProfile.addEventListener('click', closePopupOnOverlay)
 
-function validateErrorRemoving(popupForm) {                                      //функция удаления ошибок при открытии попапа 
+
+function validateErrorRemoving(popupForm) {       //функция удаления ошибок при открытии попапа 
     const inputList = Array.from(popupForm.querySelectorAll('.popup__input'));
     inputList.forEach((inputElement) => {
         hideInputError(popupForm, inputElement, config);
@@ -92,23 +85,22 @@ function validateErrorRemoving(popupForm) {                                     
 
 }
 
-function formSubmitHandler(evt) {                // эта функция вставляет в поля на странице данные из формы, которые ввел
+function formSubmitHandler(evt) {               // эта функция вставляет в поля на странице данные из формы, которые ввел
     evt.preventDefault();                        // пользователь и закрывает попап после подтверждния
 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    closePopup(popupEditProfile)
+    popupToggle(popupEditProfile);
 }
 
-formEditProfile.addEventListener('submit', formSubmitHandler);     // обработчик на  форму открытия попапа редактирования профиля
-
+formEditProfile.addEventListener('submit', formSubmitHandler);  // обработчик на  форму открытия попапа редактирования профиля
 
 editProfileButton.addEventListener('click', function () {          // обработчик на кнопку редактирования профиля, которая открывает попап
-    validateErrorRemoving(editForm);                               // обнуление ошибок при открытии
-    changeButtonState(popupEditProfile);                           // проверка кнопки сабмита
-    openPopup(popupEditProfile)                                   
-    if (popupEditProfile.classList.contains('popup_opened')) {     //присваиваем инпутам текущие значения на странице
+    validateErrorRemoving(editForm);
+    changeButtonState(popupEditProfile);                               // обнуление ошибок при открытии
+    popupToggle(popupEditProfile);                                //с функцией, которая присваивает инпутам текущие значения на странице
+   if (popupEditProfile.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
         changeButtonState(popupEditProfile);
@@ -116,9 +108,9 @@ editProfileButton.addEventListener('click', function () {          // обраб
 });
 
 createNewCardButton.addEventListener('click', function () {       // обработчик на кнопку открытия попапа создания новой карточки
-    openPopup(popupNewCard)
+    popupToggle(popupNewCard);
     validateErrorRemoving(newCardForm);
-    changeButtonState(popupNewCard);
+    changeButtonState(popupNewCard); 
     if (popupNewCard.classList.contains('popup_opened')) {
         cardFormInputImageLink.value = "";
         cardFormInputTitle.value = "";
@@ -155,10 +147,8 @@ function cardFormSubmitHandler(evt) {    //функция для формы до
     cardFormInputTitle.value = "";
 
     renderCard(name, link);                  //передаем  пользовательские данные в фунцию создания карточки
-
-    closePopup(popupNewCard)
+    popupToggle(popupNewCard);            //закрываем попап
 }
-
 
 cardForm.addEventListener('submit', cardFormSubmitHandler);  //обработчик для формы создания карточки
 
@@ -175,7 +165,7 @@ function openPopupImage(evt) {       //функция открывающая п�
     const imageElement = evt.target.closest('.grid-element__image');
     document.querySelector('.popup__image').src = imageElement.src;
     document.querySelector('.popup__bottom-title').textContent = imageElement.alt;
-    openPopup(popupImage);
+    popupToggle(popupImage);
 }
 
 function addCardListeners(card) {             //функия с обработчиками событий для карточки
