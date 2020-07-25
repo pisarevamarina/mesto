@@ -40,14 +40,16 @@
             </footer>
         </main>
         <section class="popup popup_type_edit-profile">
-            <form class="popup__form popup__form_type_edit-profile" name="edit-profile" method="GET" action="#" novalidate>
+            <form class="popup__form popup__form_type_edit-profile" name="edit-profile" method="GET" action="#"
+                novalidate>
                 <button class="popup__exit-button" type="button"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <input type="text" class="popup__input popup__input_type_name" value="Жак-Ив Кусто"
                     placeholder=" Введите имя" name="name" required minlength="2" maxlength="40" id="name-input">
                 <span class="popup__input-error" id="name-input-error"></span>
                 <input type="text" class="popup__input popup__input_type_info" value="Исследователь океана"
-                    placeholder=" Чем вы занимаетесь?" name="info" required minlength="2" maxlength="200" id="info-input">
+                    placeholder=" Чем вы занимаетесь?" name="info" required minlength="2" maxlength="200"
+                    id="info-input">
                 <span class="popup__input-error" id="info-input-error"></span>
                 <button class="popup__submit-button popup__submit-button_type_save" type="submit">Сохранить</button>
             </form>
@@ -60,8 +62,8 @@
                     name="title" required minlength="1" maxlength="30" id="title-input">
                 <span class="popup__input-error" id="title-input-error"></span>
                 <input type="url" class="popup__input popup__input_type_image-link" value=""
-                    placeholder="Ссылка на картинку" name="link" required id="link-input"> 
-                <span class="popup__input-error" id="link-input-error"></span> 
+                    placeholder="Ссылка на картинку" name="link" required id="link-input">
+                <span class="popup__input-error" id="link-input-error"></span>
                 <button class="popup__submit-button popup__submit-button_type_create" type="submit">Создать</button>
             </form>
         </section>
@@ -75,9 +77,11 @@
         </section>
 
     </div>
-    <script src="scripts/utils.js"></script>
-    <script src="scripts/validate.js"></script>
-    <script src="scripts/index.js"></script>
+    <script type="module" src="scripts/utils.js"></script>
+    <script type="module" src="scripts/Card.js"></script>
+    <script type="module" src="scripts/FormValidator.js"></script>
+    <script type="module" src="scripts/index.js"></script>
+
 </body>
 
 </html>

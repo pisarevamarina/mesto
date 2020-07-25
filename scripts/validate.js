@@ -57,9 +57,7 @@ function enableValidation (config) {
     formList.forEach((popupForm) => {
         popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
-        })
+        });
         setEventListeners(popupForm, config);
-    })
+    });
 }
-
-
