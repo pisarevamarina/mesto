@@ -1,7 +1,3 @@
-import {
-    config
-} from './utils.js';
-
 export class FormValidator {
     constructor(config, formElement) {
         this._formSelector = config.formSelector;
@@ -71,6 +67,7 @@ export class FormValidator {
         this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
         this._inputList.forEach((inputElement) => {
             this._hideInputError(inputElement);
+            this._toggleButtonState();
         });
     }
     enableValidation() {
@@ -80,11 +77,4 @@ export class FormValidator {
         this._setEventListeners();
     }
 
-    changeButtonState() {
-        const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-        const buttonElement = this._form.querySelector(this._submitButtonSelector);
-
-        this._toggleButtonState();
-
-    }
 }

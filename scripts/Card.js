@@ -4,10 +4,10 @@ import {
 } from './utils.js';
 
 export class Card {
-    constructor(objCards, template) {
-        this._name = objCards.name;
-        this._link = objCards.link;
-        this._info = objCards.name;
+    constructor(сard, template) {
+        this._name = сard.name;
+        this._link = сard.link;
+        this._info = сard.name;
         this._templateElement = template;
     }
 
@@ -30,11 +30,11 @@ export class Card {
 
     _setEventListenersOnCard() {
         this._card.querySelector('.grid-element__like-button').addEventListener('click', () =>
-            this._setLike(event));
+            this._setLike());
         this._card.querySelector('.grid-element__trash-button').addEventListener('click', () =>
-            this._deleteCard(event));
+            this._deleteCard());
         this._card.querySelector('.grid-element__image').addEventListener('click', () =>
-            this._openCardImage(event));
+            this._openCardImage());
     }
 
     _setLike() {
@@ -47,7 +47,7 @@ export class Card {
         this._card.remove();
     }
 
-    _openCardImage(event) {
+    _openCardImage() {
         const imageElement = event.target.closest('.grid-element__image');
         document.querySelector('.popup__image').src = imageElement.src;
         document.querySelector('.popup__bottom-title').textContent = imageElement.alt;

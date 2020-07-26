@@ -12,7 +12,6 @@ import {
     openPopup,
     closePopup,
     closePopupOnOverlay,
-    closePopupOnEsc,
     popupImage
 } from './utils.js';
 
@@ -47,7 +46,7 @@ initialCards.forEach((item) => {
 
 
 closePopupEditProfile.addEventListener('click', function () { //обработчики на закрытие по крестику
-    profileValidation.changeButtonState();
+    profileValidation.validateErrorRemoving();
     closePopup(popupEditProfile);
 });
 closePopupNewCard.addEventListener('click', function () {
@@ -75,24 +74,24 @@ function formSubmitHandler(evt) {                // эта функция вст
 formEditProfile.addEventListener('submit', formSubmitHandler);      // обработчик на  форму редактирования профиля
 
 editProfileButton.addEventListener('click', function () {           // обработчик на кнопку редактирования профиля
-    profileValidation.validateErrorRemoving();                      // обнуление ошибок при открытии
-    profileValidation.changeButtonState();                          // и актуализация состояния кнопки
+    profileValidation.validateErrorRemoving();                      // обнуление ошибок при открытии  и актуализация состояния кнопки
     openPopup(popupEditProfile); 
     if (popupEditProfile.classList.contains('popup_opened')) {       //при открытии выводим в инпуты актуальное значение полей на странице
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
 
-        profileValidation.changeButtonState();
+        profileValidation.validateErrorRemoving();
+        
     }
 });
 
 createNewCardButton.addEventListener('click', function () {           // обработчик на кнопку открытия попапа создания новой карточки
     openPopup(popupNewCard);
-    cardValidation.changeButtonState();
     cardValidation.validateErrorRemoving();
     if (popupNewCard.classList.contains('popup_opened')) {
         cardFormInputImageLink.value = "";
         cardFormInputTitle.value = "";
+        cardValidation.validateErrorRemoving();
     }
 });
 
