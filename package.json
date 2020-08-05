@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "* This app allowed you to post your photos in your personal travel blog *",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pisarevamarina/mesto.git"
+  },
+  "author": "Marina Pisareva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pisarevamarina/mesto/issues"
+  },
+  "homepage": "https://github.com/pisarevamarina/mesto#readme"
+}
