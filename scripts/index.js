@@ -63,19 +63,18 @@ cardsSection.renderItems();
 
 const addingNewCardPopup = new PopupWithForm ({
   popupSelector: '.popup_type_new-card', 
-  formSubmitHandler: (obj) => {
+  formSubmitHandler: (data) => {
 
   // const name = cardFormInputTitle.value;
   // const link = cardFormInputImageLink.value;
-
 
   // cardFormInputImageLink.value = '';
   // cardFormInputTitle.value = '';
 
 
   // const obj = {name, link};
-
-  const card = new Card(obj, '.template-cards');
+console.log(data)
+  const card = new Card(data, '.template-cards');
   const cardElement = card.addCard();
 
   cardsList.prepend(cardElement);
