@@ -1,10 +1,10 @@
 // import { openPopup, popupImage } from "./utils.js";
 
 export class Card {
-  constructor(сard, template, handleCardClick) {
-    this._name = сard.name;
-    this._link = сard.link;
-    this._info = сard.name;
+  constructor(data, template, handleCardClick) {
+    this._name = data.title;
+    this._link = data.link;
+    this._info = data.title;
     this._templateElement = template;
     this.handleCardClick = handleCardClick;
   }
@@ -23,7 +23,6 @@ export class Card {
     cardImage.alt = this._info;
 
     this._setEventListenersOnCard();
-
     return this._card;
   }
 
