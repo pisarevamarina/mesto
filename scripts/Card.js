@@ -1,11 +1,12 @@
-import { openPopup, popupImage } from "./utils.js";
+// import { openPopup, popupImage } from "./utils.js";
 
 export class Card {
-  constructor(сard, template) {
+  constructor(сard, template, handleCardClick) {
     this._name = сard.name;
     this._link = сard.link;
     this._info = сard.name;
     this._templateElement = template;
+    this.handleCardClick = handleCardClick;
   }
 
   addCard() {
@@ -47,11 +48,11 @@ export class Card {
     this._card.remove();
   }
 
-  _openCardImage() {
-    const imageElement = event.target.closest(".grid-element__image");
-    document.querySelector(".popup__image").src = imageElement.src;
-    document.querySelector(".popup__bottom-title").textContent =
-      imageElement.alt;
-    openPopup(popupImage);
+  // _openCardImage() {
+  //   const imageElement = event.target.closest(".grid-element__image");
+  //   document.querySelector(".popup__image").src = imageElement.src;
+  //   document.querySelector(".popup__bottom-title").textContent =
+  //     imageElement.alt;
+  //   openPopup(popupImage);
   }
-}
+// }
