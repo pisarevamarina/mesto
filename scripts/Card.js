@@ -1,11 +1,11 @@
 // import { openPopup, popupImage } from "./utils.js";
 
 export class Card {
-  constructor(data, template, handleCardClick) {
+  constructor({data, templateElement, handleCardClick}) {
     this._name = data.title;
     this._link = data.link;
     this._info = data.title;
-    this._templateElement = template;
+    this._templateElement = templateElement;
     this.handleCardClick = handleCardClick;
   }
 
@@ -35,7 +35,7 @@ export class Card {
       .addEventListener("click", () => this._deleteCard());
     this._card
       .querySelector(".grid-element__image")
-      .addEventListener("click", () => this._openCardImage());
+      .addEventListener("click", () => this.handleCardClick());
   }
 
   _setLike() {

@@ -3,9 +3,6 @@ import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 import { Section } from './Section.js';
 import {
-  // openPopup,
-  // closePopup,
-  // closePopupOnOverlay,
   popupImage,
 } from './utils.js';
 import PopupWithForm from './PopupWithForm.js';
@@ -48,10 +45,17 @@ const newUserInfo = new UserInfo ('.profile__title', '.profile__subtitle');
 //работает
 const cardsSection  = new Section ({
   items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, '.template-cards'); // записали в переменную новую копию карточки
+  renderer: (data) => {
     
-    const cardElement = card.addCard(); // записали в переменную разультат вызова метода создания разметки новой карточки
+    const card = new Card({
+     data,
+      templateElement: '.template-cards' ,
+      handleCardClick: () => {
+        const zoomImagePopup = new PopupWithImage('.popup_type_image')
+        zoomImagePopup.open();
+    }  
+    }); 
+    const cardElement = card.addCard();
   
     cardsSection.addItem(cardElement);
 
@@ -62,12 +66,20 @@ const cardsSection  = new Section ({
 cardsSection.renderItems();
 
 
+
 //попап с формой добавление карточек пользователя
 const addingNewCardPopup = new PopupWithForm ({
   popupSelector: '.popup_type_new-card', 
   formSubmitHandler: data => {
 
-  const card = new Card(data, '.template-cards');
+  const card = new Card({
+     data,
+    templateElement: '.template-cards', 
+      handleCardClick: () => {
+      const zoomImagePopup = new PopupWithImage('.popup_type_image')
+      zoomImagePopup.open();
+  } 
+});
   const cardElement = card.addCard();
 
  cardsSection.addItem(cardElement);
@@ -90,6 +102,8 @@ newUserInfo.setUserInfo(data);
 
 profileEditPopup.setEventListeners();
 addingNewCardPopup.setEventListeners();
+
+
 
 //обработчик кнопки создания новой карточки
 createNewCardButton.addEventListener('click', () => {
