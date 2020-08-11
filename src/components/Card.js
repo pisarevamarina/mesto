@@ -46,12 +46,5 @@ export class Card {
     this._card = event.target.closest(".grid-element");
     this._card.remove();
   }
-
-  // _openCardImage() {
-  //   const imageElement = event.target.closest(".grid-element__image");
-  //   document.querySelector(".popup__image").src = imageElement.src;
-  //   document.querySelector(".popup__bottom-title").textContent =
-  //     imageElement.alt;
-  //   openPopup(popupImage);
   }
-// }
+

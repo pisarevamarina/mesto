@@ -1,4 +1,3 @@
-// const { Popup } = require('./Popup');
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {

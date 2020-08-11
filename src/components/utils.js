@@ -41,29 +41,18 @@ export const config = {
   errorActiveClass: "popup__input-error_active",
 };
 
-export const popupImage = document.querySelector(".popup_type_image");
 
-// export function openPopup(popup) {
-//   popup.classList.add("popup_opened");
-//   document.addEventListener("keydown", closePopupOnEsc);
-// }
+export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+export const editForm = popupEditProfile.querySelector('.popup__form');
+export const popupNewCard = document.querySelector('.popup_type_new-card');
+export const newCardForm = popupNewCard.querySelector('.popup__form');
+export const editProfileButton = document.querySelector('.profile__edit-button');
+export const cardForm = document.querySelector(".popup_form_type_new-card");
+export const cardFormInputTitle = cardForm.querySelector(".popup__input_type_title");
+export const cardFormInputImageLink = cardForm.querySelector(".popup__input_type_image-link");
 
-// export function closePopup(popup) {
-//   popup.classList.remove("popup_opened");
-//   document.removeEventListener("keydown", closePopupOnEsc);
-// }
+export const nameInput = document.querySelector('.popup__input_type_name');
+export const jobInput = document.querySelector('.popup__input_type_info');
 
-// export function closePopupOnEsc(evt) {
-//   // закрытие попапа по ESC
-//   const currentPopup = document.querySelector(".popup_opened");
-//   if (currentPopup && evt.key === "Escape") {
-//     closePopup(currentPopup);
-//   }
-// }
+export const createNewCardButton = document.querySelector('.profile__add-button');
 
-// export function closePopupOnOverlay(evt) {
-//   const currentPopup = document.querySelector(".popup_opened");
-//   if (currentPopup && evt.target === evt.currentTarget) {
-//     closePopup(currentPopup);
-//   }
-// }
