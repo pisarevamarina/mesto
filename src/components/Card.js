@@ -1,7 +1,7 @@
 // import { openPopup, popupImage } from "./utils.js";
 
 export class Card {
-  constructor({data, templateElement, handleCardClick}) {
+  constructor({ data, templateElement, handleCardClick }) {
     this._name = data.title;
     this._link = data.link;
     this._info = data.title;
@@ -16,8 +16,8 @@ export class Card {
 
     this._card = cardElement; //записывваем в переменную текущей карточки новую разметку
 
-    const cardImage = this._card.querySelector(".grid-element__image"); //нашли элементы с картинкой и названием
-    const cardTitle = this._card.querySelector(".grid-element__title");
+    const cardImage = this._card.querySelector('.grid-element__image'); //нашли элементы с картинкой и названием
+    const cardTitle = this._card.querySelector('.grid-element__title');
     cardTitle.textContent = this._name; //записали в эти поля данные новой карточки
     cardImage.src = this._link;
     cardImage.alt = this._info;
@@ -28,23 +28,22 @@ export class Card {
 
   _setEventListenersOnCard() {
     this._card
-      .querySelector(".grid-element__like-button")
-      .addEventListener("click", () => this._setLike());
+      .querySelector('.grid-element__like-button')
+      .addEventListener('click', () => this._setLike());
     this._card
-      .querySelector(".grid-element__trash-button")
-      .addEventListener("click", () => this._deleteCard());
+      .querySelector('.grid-element__trash-button')
+      .addEventListener('click', () => this._deleteCard());
     this._card
-      .querySelector(".grid-element__image")
-      .addEventListener("click", () => this.handleCardClick());
+      .querySelector('.grid-element__image')
+      .addEventListener('click', () => this.handleCardClick());
   }
 
   _setLike() {
-    event.target.classList.toggle("grid-element__like-button_active");
+    event.target.classList.toggle('grid-element__like-button_active');
   }
 
   _deleteCard() {
-    this._card = event.target.closest(".grid-element");
+    this._card = event.target.closest('.grid-element');
     this._card.remove();
   }
-  }
-
+}
