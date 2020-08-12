@@ -1,5 +1,3 @@
-// import { openPopup, popupImage } from "./utils.js";
-
 export class Card {
   constructor({ data, templateElement, handleCardClick }) {
     this._name = data.title;

@@ -61,6 +61,6 @@ export const cardFormInputImageLink = cardForm.querySelector(
 export const nameInput = document.querySelector('.popup__input_type_name');
 export const jobInput = document.querySelector('.popup__input_type_info');
 
-export const createNewCardButton = document.querySelector(
+export const newCardButton = document.querySelector(
   '.profile__add-button'
 );
