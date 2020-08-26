@@ -7,13 +7,13 @@ export class UserInfo {
     this._userInfo = {};
 
     this._userInfo.name = this._nameElement.textContent;
-    this._userInfo.info = this._jobElement.textContent;
+    this._userInfo.about = this._jobElement.textContent;
 
     return this._userInfo;
   }
 
   setUserInfo(userData) {
     this._nameElement.textContent = userData.name;
-    this._jobElement.textContent = userData.info;
+    this._jobElement.textContent = userData.about;
   }
 }

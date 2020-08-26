@@ -23,9 +23,9 @@
             class="profile__avatar"
           />
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__subtitle">Исследователь океана</p>
+            <p class="profile__subtitle"></p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -40,10 +40,14 @@
               <button class="grid-element__trash-button" type="button"></button>
               <div class="grid-element__description">
                 <h3 class="grid-element__title"></h3>
-                <button
+                <div class="grid-element__like-container">
+                  <button
                   class="grid-element__like-button"
                   type="button"
                 ></button>
+                <h3 class="grid-element__like-count">1</h3>
+                </div>
+                
               </div>
             </div>
           </template>
@@ -79,7 +83,7 @@
             class="popup__input popup__input_type_info"
             value="Исследователь океана"
             placeholder=" Чем вы занимаетесь?"
-            name="info"
+            name="about"
             required
             minlength="2"
             maxlength="200"
@@ -98,7 +102,7 @@
         <form
           class="popup__form popup_form_type_new-card"
           name="add-new-cart"
-          method="GET"
+          method="POST"
           action="#"
           novalidate
         >
@@ -109,7 +113,7 @@
             class="popup__input popup__input_type_title"
             value=""
             placeholder="Название"
-            name="title"
+            name="name"
             required
             minlength="1"
             maxlength="30"
@@ -148,6 +152,33 @@
           <h3 class="popup__bottom-title">Крым</h3>
         </div>
       </section>
+      <section class="popup popup_type_confirm-deleting">
+        <form action="" method="" class="popup__form popup_form_type_confirm-deleting">
+          <button
+          class="popup__exit-button popup__exit-button_type_confirm-deleting"
+          type="button"
+        ></button>
+          <h3 class="popup__title popup__title_type_confirm-deleting">Вы уверены?</h3>
+          <button class="popup__submit-button popup__submit-button_type_confirm-deleting">Да</button>
+        </form>
+      </section>
+<section class="popup popup_type_avatar">
+  <form action="" method="" class="popup__form popup_form_type_avatar">
+    <h3 class="popup__title popup__title_type_avatar">Обновить аватар</h3>
+    <input
+    type="url"
+    class="popup__input popup__input_type_avatar"
+    value=""
+    placeholder="Ссылка на картинку"
+    name="avatar"
+    required
+    id="avatar-input"
+  />
+  <span class="popup__input-error" id="link-input-error"></span>
+    <button class="popup__submit-button popup__submit-button_type_avatar">Сохранить</button>
+  </form>
+</section>
+
     </div>
   </body>
 </html>

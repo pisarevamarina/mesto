@@ -64,3 +64,4 @@ export const jobInput = document.querySelector('.popup__input_type_info');
 export const newCardButton = document.querySelector(
   '.profile__add-button'
 );
+

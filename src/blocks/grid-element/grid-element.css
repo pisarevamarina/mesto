@@ -4,6 +4,9 @@
 @import url(../grid-element/__like-button/grid-element__like-button.css);
 @import url(../grid-element/__like-button/_active/grid-element__like-button_active.css);
 @import url(../grid-element/__trash-button/grid-element__trash-button.css);
+@import url(../grid-element/__like-count/grid-element__like-count.css);
+@import url(../grid-element/__like-container/grid-element__like-container.css);
+
 
 .grid-element{
     border-radius: 10px;
