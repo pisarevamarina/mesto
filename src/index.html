@@ -17,12 +17,7 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            src="images/profile___avatar.jpg"
-            alt="Аватар пользователя"
-            class="profile__avatar"
-          />
-          
+           <button class="profile__avatar" type="button"></button>
           <div class="profile__info">
             <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button"></button>
@@ -165,6 +160,9 @@
       </section>
 <section class="popup popup_type_avatar">
   <form action="" method="" class="popup__form popup_form_type_avatar">
+    <button
+    class="popup__exit-button popup__exit-button_type_avatar"
+    type="button"></button>
     <h3 class="popup__title popup__title_type_avatar">Обновить аватар</h3>
     <input
     type="url"
@@ -175,7 +173,7 @@
     required
     id="avatar-input"
   />
-  <span class="popup__input-error" id="link-input-error"></span>
+  <span class="popup__input-error" id="avatar-input-error"></span>
     <button class="popup__submit-button popup__submit-button_type_avatar">Сохранить</button>
   </form>
 </section>

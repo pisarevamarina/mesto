@@ -25,15 +25,12 @@ export class Card {
   _getTemplate() {
     const cardElement = document
     .querySelector(this._templateElement)
-    .content.cloneNode(true);
+    .content.querySelector('.grid-element').cloneNode(true);
 
     return cardElement;
   }
 
   addCard() {
-  //   const cardElement = document
-  // .querySelector(this._templateElement)
-  // .content.cloneNode(true);
 
     this._card = this._getTemplate() //записывваем в переменную текущей карточки новую разметку
 

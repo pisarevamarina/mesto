@@ -64,4 +64,7 @@ export const jobInput = document.querySelector('.popup__input_type_info');
 export const newCardButton = document.querySelector(
   '.profile__add-button'
 );
-
+export const popupEditAvatar = document.querySelector('.popup_type_avatar');
+export const editAvatarButton = document.querySelector('.profile__avatar');
+export const avatarForm = popupEditAvatar.querySelector('.popup__form');
+export const avatarImg = document.querySelector('.profile__avatar');
