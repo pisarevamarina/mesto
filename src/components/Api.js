@@ -102,4 +102,20 @@ this.headers = options.headers;
             return Promise.reject(`Упс! Ошибка: ${res.status}`)
         })
     }
+
+    changeAvatar ({avatar}) {
+        return fetch (`${this.baseUrl}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this.headers,
+            body: JSON.stringify({
+            avatar
+              })
+        })
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Упс! Ошибка: ${res.status}`)
+        })
+    }
 }

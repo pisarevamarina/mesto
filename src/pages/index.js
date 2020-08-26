@@ -111,6 +111,7 @@ const cardsSection = new Section(
         
         },
 
+
       });
       const cardElement = card.addCard();
       cardsSection.addItem(cardElement);
@@ -176,6 +177,7 @@ const addingNewCardPopup = new PopupWithForm({
         popupWithDeletingCard.open()
         
         },
+
       });
 
       const cardElement = card.addCard()

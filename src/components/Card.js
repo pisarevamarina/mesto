@@ -22,12 +22,20 @@ export class Card {
     }
   }
 
-  addCard() {
+  _getTemplate() {
     const cardElement = document
-  .querySelector(this._templateElement)
-  .content.cloneNode(true);
+    .querySelector(this._templateElement)
+    .content.cloneNode(true);
 
-    this._card = cardElement //записывваем в переменную текущей карточки новую разметку
+    return cardElement;
+  }
+
+  addCard() {
+  //   const cardElement = document
+  // .querySelector(this._templateElement)
+  // .content.cloneNode(true);
+
+    this._card = this._getTemplate() //записывваем в переменную текущей карточки новую разметку
 
    this.cardImage = this._card.querySelector('.grid-element__image'); //нашли элементы с картинкой и названием
     this.cardTitle = this._card.querySelector('.grid-element__title');
