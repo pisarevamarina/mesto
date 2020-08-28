@@ -68,3 +68,5 @@ export const popupEditAvatar = document.querySelector('.popup_type_avatar');
 export const editAvatarButton = document.querySelector('.profile__avatar');
 export const avatarForm = popupEditAvatar.querySelector('.popup__form');
 export const avatarImg = document.querySelector('.profile__avatar');
+
+export const templateElement = document.querySelector('.template-cards');

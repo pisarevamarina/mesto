@@ -13,6 +13,7 @@ import {
   editAvatarButton,
   avatarForm,
   avatarImg,
+  templateElement
 } from '../utils/utils.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -22,6 +23,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import PopupWithSubmit from '../components/PopupWithSubmit.js';
+import { data } from 'autoprefixer';
 
 const profileValidation = new FormValidator(config, editForm);
 const cardValidation = new FormValidator(config, newCardForm);
@@ -58,11 +60,9 @@ let userId;
 api
   .getUserInfo()
   .then((item) => {
-    const name = item.name;
-    const about = item.about;
     avatarImg.style.backgroundImage = `url(${item.avatar})`;
     userId = item._id;
-    newUserInfo.setUserInfo({ name, about });
+    newUserInfo.setUserInfo(item);
   })
   .catch((err) => {
     console.log(err);
@@ -78,54 +78,67 @@ api
     console.log(err);
   });
 
+//создание карточки 
+  const renderer = (data) => {
+    const card = new Card ({data, userId, templateElement, handleCardClick, handleLikeClick, deleteLike, handleCardDelete});
+    const cardElement = card.addCard();
+    cardsSection.addItem(cardElement);
+
+    //просмотр картинок в оригинальном размере
+    function handleCardClick () {
+      zoomImagePopup.open();
+    }
+     
+    //поставить лайк
+    function handleLikeClick (cardId) {
+      api.setLike(cardId)
+            .then(() => {
+              card.setLike();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+  
+    }
+    //удаление лайка
+    function deleteLike (cardId) {
+      api.deleteLike(cardId)
+      .then(()=> {
+        card.setLike();
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+    //удаление карточки
+    function handleCardDelete (cardId) {
+      popupWithDeletingCard.setFormSubmitHandler(() => {
+        renderLoading(true, '.popup_type_confirm-deleting')
+        api
+          .deleteCard(cardId)
+          .then(() => {
+            card.deleteCard();
+
+            popupWithDeletingCard.close();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally (() => renderLoading(false, '.popup_type_confirm-deleting'))
+      });
+
+      popupWithDeletingCard.open();
+    };
+  }
+
 const cardsSection = new Section(
   {
     items: initialCards,
-    renderer: (data) => {
-      const card = new Card({
-        data,
-        userId,
-        templateElement: '.template-cards',
-        handleCardClick: () => {
-          zoomImagePopup.open();
-        },
-        setLike: (cardId) => {
-          api.setLike(cardId).catch((err) => {
-            console.log(err);
-          });
-        },
-        deleteLike: (cardId) => {
-          api.deleteLike(cardId).catch((err) => {
-            console.log(err);
-          });
-        },
-        handleCardDelete(cardId) {
-          popupWithDeletingCard.setFormSubmitHandler(() => {
-            renderLoading(true, '.popup_type_confirm-deleting')
-            api
-              .deleteCard(cardId)
-              .then(() => {
-                card.deleteCard();
-
-                popupWithDeletingCard.close();
-              })
-              .catch((err) => {
-                console.log(err);
-              })
-              .finally (() => renderLoading(false, '.popup_type_confirm-deleting'))
-          });
-
-          popupWithDeletingCard.open();
-        },
-      });
-      const cardElement = card.addCard();
-      cardsSection.addItem(cardElement);
-    },
+    renderer
   },
-  '.grid-elements'
+    '.grid-elements'
 );
 
-//попап с формой добавление карточек пользователя
+
 const addingNewCardPopup = new PopupWithForm({
   popupSelector: '.popup_type_new-card',
   formSubmitHandler: (data) => {
@@ -133,48 +146,7 @@ const addingNewCardPopup = new PopupWithForm({
     renderLoading(true, '.popup_type_new-card')
     api.postUserCard(data)
       .then((data) => {
-        const card = new Card({
-          data,
-          userId,
-          templateElement: '.template-cards',
-          handleCardClick: () => {
-            // const zoomImagePopup = new PopupWithImage('.popup_type_image');
-            zoomImagePopup.open();
-            // zoomImagePopup.setEventListeners();
-          },
-          setLike: (cardId) => {
-            api.setLike(cardId).catch((err) => {
-              console.log(err);
-            });
-          },
-          deleteLike: (cardId) => {
-            api.deleteLike(cardId).catch((err) => {
-              console.log(err);
-            });
-          },
-
-          handleCardDelete(cardId) {
-            popupWithDeletingCard.setFormSubmitHandler(() => {
-              renderLoading(true, '.popup_type_confirm-deleting')
-              api
-                .deleteCard(cardId)
-                .then(() => {
-                  card.deleteCard();
-
-                  popupWithDeletingCard.close();
-                })
-                .catch((err) => {
-                  console.log(err);
-                })
-                .finally(() => renderLoading(false, '.popup_type_confirm-deleting'))
-            });
-
-            popupWithDeletingCard.open();
-          },
-        });
-
-        const cardElement = card.addCard();
-        cardsSection.addItem(cardElement);
+        renderer(data)
         addingNewCardPopup.close();
       })
       .catch((err) => {
@@ -207,6 +179,7 @@ const profileEditPopup = new PopupWithForm({
   },
 });
 
+//попап редактирования аватара
 const popupWithAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
   formSubmitHandler: (link) => {
@@ -251,11 +224,14 @@ editProfileButton.addEventListener('click', () => {
   profileEditPopup.open();
 });
 
+//обработчки кнопки открытия попапа редактирования аватара
 editAvatarButton.addEventListener('click', () => {
   avatarValidation.validateErrorRemoving();
+
   popupWithAvatar.open();
 });
 
+//включение валидации
 profileValidation.enableValidation();
 cardValidation.enableValidation();
 avatarValidation.enableValidation();

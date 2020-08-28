@@ -6,16 +6,18 @@ this.baseUrl =  options.baseUrl;
 this.headers = options.headers;
     }
 
+    _getResponseData(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Упс! Ошибка: ${res.status}`)
+      }
+
     getInitialCards() {
         return fetch (`${this.baseUrl}/cards`, {
             headers: this.headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Упс! Ошибка: ${res.status}`)
-        })
+        .then(this._getResponseData);
     }
 
     postUserCard ({name, link}){
@@ -26,24 +28,14 @@ this.headers = options.headers;
              name, link
             })
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Упс! Ошибка: ${res.status}`)
-        })
+        .then(this._getResponseData);
     }
 
     getUserInfo() {
         return fetch (`${this.baseUrl}/users/me`, {
             headers: this.headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Упс! Ошибка: ${res.status}`)
-        })
+        .then(this._getResponseData);
 }
 
     editUserInfo({name, about}) {
@@ -55,39 +47,24 @@ this.headers = options.headers;
               })
 
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Упс! Ошибка: ${res.status}`)
-        })
+        .then(this._getResponseData);
 
     }
 
-    setLike(cardId) {
+   setLike (cardId) {
         return fetch (`${this.baseUrl}/cards/likes/${cardId}`, {
           method: 'PUT',
           headers: this.headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Упс! Ошибка: ${res.status}`)
-        })
+        .then(this._getResponseData);
     }
 
-    deleteLike(cardId) {
+    deleteLike (cardId) {
         return fetch (`${this.baseUrl}/cards/likes/${cardId}`, {
             method: 'DELETE',
             headers: this.headers
           })
-          .then(res => {
-              if (res.ok) {
-                  return res.json();
-              }
-              return Promise.reject(`Упс! Ошибка: ${res.status}`)
-          })
+          .then(this._getResponseData);
     }
 
     deleteCard(cardId) {
@@ -95,12 +72,7 @@ this.headers = options.headers;
             method: 'DELETE',
             headers: this.headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Упс! Ошибка: ${res.status}`)
-        })
+        .then(this._getResponseData);
     }
 
     changeAvatar({avatar}) {
@@ -109,11 +81,6 @@ this.headers = options.headers;
             headers: this.headers,
             body: JSON.stringify({avatar})
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Упс! Ошибка: ${res.status}`)
-        })
+        .then(this._getResponseData);
     }
 }
