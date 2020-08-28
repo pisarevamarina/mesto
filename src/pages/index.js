@@ -39,6 +39,7 @@ const renderLoading = (loading, popupSelector) => {
 
   button.textContent = loading ? 'Сохранение...' : 'Сохранить';
 };
+let userId;
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
@@ -48,6 +49,16 @@ const api = new Api({
   },
 });
 
+Promise.all([
+  api.getUserInfo(),
+  api.getInitialCards()
+])
+  .then(([user,data]) => {
+    avatarImg.style.backgroundImage = `url(${user.avatar})`;
+    userId = user._id;
+    newUserInfo.setUserInfo(user);
+    cardsSection.renderItems(data)
+  })
 //попап с открытием изображения
 const zoomImagePopup = new PopupWithImage('.popup_type_image');
 
@@ -55,32 +66,9 @@ const popupWithDeletingCard = new PopupWithSubmit(
   '.popup_type_confirm-deleting'
 );
 
-let userId;
-
-api
-  .getUserInfo()
-  .then((item) => {
-    avatarImg.style.backgroundImage = `url(${item.avatar})`;
-    userId = item._id;
-    newUserInfo.setUserInfo(item);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-api
-  .getInitialCards()
-  .then((result) => {
-    console.log(result);
-    cardsSection.renderItems(result);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 //создание карточки 
   const renderer = (data) => {
-    const card = new Card ({data, userId, templateElement, handleCardClick, handleLikeClick, deleteLike, handleCardDelete});
+    const card = new Card ({data, userId, templateElement, handleCardClick, handleLikeClick, handleCardDelete});
     const cardElement = card.addCard();
     cardsSection.addItem(cardElement);
 
@@ -91,23 +79,23 @@ api
      
     //поставить лайк
     function handleLikeClick (cardId) {
-      api.setLike(cardId)
-            .then(() => {
-              card.setLike();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-  
-    }
-    //удаление лайка
-    function deleteLike (cardId) {
-      api.deleteLike(cardId)
-      .then(()=> {
-        card.setLike();
-      }).catch((err) => {
-        console.log(err);
-      });
+      if(card.isLiked()) {
+        api.deleteLike(cardId)
+        .then((data) => {
+          card.updateLikes(data.likes);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      } else {
+        api.setLike(cardId)
+        .then((data) => {
+          card.updateLikes(data.likes);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      }
     }
     //удаление карточки
     function handleCardDelete (cardId) {
@@ -129,6 +117,7 @@ api
       popupWithDeletingCard.open();
     };
   }
+
 
 const cardsSection = new Section(
   {
@@ -196,6 +185,7 @@ const popupWithAvatar = new PopupWithForm({
       .finally(() => renderLoading(true, '.popup_form_type_avatar'));
   },
 });
+
 
 profileEditPopup.setEventListeners();
 addingNewCardPopup.setEventListeners();
